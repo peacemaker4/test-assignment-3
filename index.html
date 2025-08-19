@@ -4,8 +4,16 @@
         <meta charset="utf-8">
         <title>Многоуровневое меню</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+        <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <a-scene cursor="rayOrigin: mouse;" background="color: #d1fdff" environment="">
+            <a-camera position="0 0 0"></a-camera>
 
+            <a-entity id="scene-root"></a-entity>
+        </a-scene>
+
+        <script src="menu.js"></script>
     </body>
 </html>

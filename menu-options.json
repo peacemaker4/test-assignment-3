@@ -1,0 +1,241 @@
+{
+  "menu_options": [
+    {
+      "name": "Food",
+      "level": 0,
+      "color": "#F28C8C",
+      "options": [
+        {
+          "name": "Drinks",
+          "level": 1,
+          "color": "#FFD166",
+          "options": [
+            {
+              "name": "Coffee",
+              "level": 2,
+              "color": "#6F4E37"
+            },
+            {
+              "name": "Tea",
+              "level": 2,
+              "color": "#FFA500"
+            }
+          ]
+        },
+        {
+          "name": "Bakery",
+          "level": 1,
+          "color": "#E6C79C",
+          "options": [
+            {
+              "name": "Croissant",
+              "level": 2,
+              "color": "#D4A373"
+            },
+            {
+              "name": "Donut",
+              "level": 2,
+              "color": "#FF69B4"
+            }
+          ]
+        },
+        {
+          "name": "Fruits",
+          "level": 1,
+          "color": "#90EE90",
+          "options": [
+            {
+              "name": "Apple",
+              "level": 2,
+              "color": "#FF0000"
+            },
+            {
+              "name": "Banana",
+              "level": 2,
+              "color": "#F2D57E"
+            },
+            {
+              "name": "Orange",
+              "level": 2,
+              "color": "#FFA500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transport",
+      "level": 0,
+      "color": "#6CA6CD",
+      "options": [
+        {
+          "name": "Water Transport",
+          "level": 1,
+          "color": "#4682B4",
+          "options": [
+            {
+              "name": "Boat",
+              "level": 2,
+              "color": "#2F4F4F"
+            },
+            {
+              "name": "Yacht",
+              "level": 2,
+              "color": "#87CEFA"
+            }
+          ]
+        },
+        {
+          "name": "Land Transport",
+          "level": 1,
+          "color": "#DC143C",
+          "options": [
+            {
+              "name": "SUV",
+              "level": 2,
+              "color": "#228B22"
+            },
+            {
+              "name": "Truck",
+              "level": 2,
+              "color": "#A9A9A9"
+            }
+          ]
+        },
+        {
+          "name": "Air Transport",
+          "level": 1,
+          "color": "#B0C4DE",
+          "options": [
+            {
+              "name": "Airplane",
+              "level": 2,
+              "color": "#D7D7D9"
+            },
+            {
+              "name": "Helicopter",
+              "level": 2,
+              "color": "#228B22"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Furniture",
+      "level": 0,
+      "color": "#C19A6B",
+      "options": [
+        {
+          "name": "Storage",
+          "level": 1,
+          "color": "#8B4513",
+          "options": [
+            {
+              "name": "Bookshelf",
+              "level": 2,
+              "color": "#A0522D"
+            },
+            {
+              "name": "Wardrobe",
+              "level": 2,
+              "color": "#DEB887"
+            }
+          ]
+        },
+        {
+          "name": "Chairs",
+          "level": 1,
+          "color": "#CD853F",
+          "options": [
+            {
+              "name": "Office Chair",
+              "level": 2,
+              "color": "#2F4F4F"
+            },
+            {
+              "name": "Dining Chair",
+              "level": 2,
+              "color": "#8B0000"
+            }
+          ]
+        },
+        {
+          "name": "Tables",
+          "level": 1,
+          "color": "#D2B48C",
+          "options": [
+            {
+              "name": "Dining Table",
+              "level": 2,
+              "color": "#A0522D"
+            },
+            {
+              "name": "Desk",
+              "level": 2,
+              "color": "#8B4513"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Technology",
+      "level": 0,
+      "color": "#708090",
+      "options": [
+        {
+          "name": "AR/VR Devices",
+          "level": 1,
+          "color": "#D285F2",
+          "options": [
+            {
+              "name": "VR Headset",
+              "level": 2,
+              "color": "#D7D7D9"
+            },
+            {
+              "name": "AR Glasses",
+              "level": 2,
+              "color": "#0476D9"
+            }
+          ]
+        },
+        {
+          "name": "Computers",
+          "level": 1,
+          "color": "#A9A9A9",
+          "options": [
+            {
+              "name": "Laptop",
+              "level": 2,
+              "color": "#B0B0B0"
+            },
+            {
+              "name": "PC",
+              "level": 2,
+              "color": "#05C7F2"
+            }
+          ]
+        },
+        {
+          "name": "Smartphones",
+          "level": 1,
+          "color": "#91ffb4",
+          "options": [
+            {
+              "name": "Android",
+              "level": 2,
+              "color": "#32CD32"
+            },
+            {
+              "name": "iPhone",
+              "level": 2,
+              "color": "#91efff"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

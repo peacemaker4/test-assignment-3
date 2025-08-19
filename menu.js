@@ -4,6 +4,7 @@ const menuPath = document.getElementById("menu-path");
 const backBtn = document.getElementById("back-btn");
 
 let currentList = [];
+let menuData = null;
 
 //Category, Subcategory
 function renderList(categories) {
@@ -46,9 +47,9 @@ function renderItem(item) {
     sceneRoot.innerHTML = "";
 
     const entity = document.createElement("a-entity");
-    entity.setAttribute("geometry", "primitive: dodecahedron; height: 0.8;");
+    entity.setAttribute("geometry", "primitive: dodecahedron; radius: 1;");
+    entity.setAttribute("material", `color:${item.color}`);
     entity.setAttribute("position", "0 0 -3");
-    entity.setAttribute("color", item.color);
 
     const text = document.createElement("a-text");
     text.setAttribute("value", item.name);
@@ -63,8 +64,14 @@ function renderItem(item) {
 
 //Menu path update
 function updateMenuPath() {
-    const path = currentList.slice(1).map(x => x.name);
-    menuPath.textContent = (path.join(" / "));
+    const pathParts = currentList.slice(1).map(x => x.name);
+    menuPath.innerHTML = "";
+    menuPath.textContent = (pathParts.join(" / "));
+
+    //Add params to path
+    const pathString = pathParts.join("/");
+    const newUrl = window.location.pathname + (pathString ? `?path=${pathString}` : "");
+    window.history.replaceState({}, "", newUrl);
 }
 
 //Back button
@@ -76,11 +83,43 @@ backBtn.addEventListener("click", () => {
     }
 });
 
+//Open link to item
+function navigateToPath(pathParts, options) {
+    let opt = options;
+
+    for (const p of pathParts) {
+        const found = opt.find(i => i.name === p);
+        if (!found) {
+            return renderList(opt);
+        }
+
+        currentList.push({ data: found.options || [], name: found.name });
+        opt = found.options || [];
+
+        if (opt.length === 0) {
+            return renderItem(found);
+        }
+    }
+
+    return renderList(opt);
+}
+
 //Load json data
 fetch("https://raw.githubusercontent.com/peacemaker4/test-assignment-3/refs/heads/main/menu-options.json")
     .then(response => response.json())
     .then(jdata => {
-        currentList = [{data: jdata.menu_options}];
-        renderList(jdata.menu_options);
+        menuData = jdata.menu_options;
+
+        currentList = [{data: menuData}];
+
+        //Check url for path
+        const urlParams = new URLSearchParams(window.location.search);
+        const pathParam = urlParams.get("path");
+        if (pathParam) {
+            const pathParts = pathParam.split("/");
+            navigateToPath(pathParts, menuData);
+        } else {
+            renderList(menuData);
+        }
     })
     .catch(err => console.error(err));

@@ -1,5 +1,7 @@
 const sceneRoot = document.getElementById("scene-root");
+
 const menuPath = document.getElementById("menu-path");
+const backBtn = document.getElementById("back-btn");
 
 let currentList = [];
 
@@ -26,16 +28,17 @@ function renderList(categories) {
 
         box.addEventListener("click", () => {
         if (cat.options) {
-            currentList.push({ data: cat.options });
+            currentList.push({ data: cat.options, name: cat.name });
             renderList(cat.options);
         } else {
-            currentList.push({ data: [] });
+            currentList.push({ data: [], name: cat.name });
             renderItem(cat);
         }
         });
 
         sceneRoot.appendChild(box);
     })
+    updateMenuPath();
 }
 
 //Item
@@ -55,12 +58,29 @@ function renderItem(item) {
     entity.appendChild(text);
 
     sceneRoot.appendChild(entity);
+    updateMenuPath();
 }
 
+//Menu path update
+function updateMenuPath() {
+    const path = currentList.slice(1).map(x => x.name);
+    menuPath.textContent = (path.join(" / "));
+}
+
+//Back button
+backBtn.addEventListener("click", () => {
+    if (currentList.length > 1) {
+        currentList.pop();
+        const prev = currentList[currentList.length - 1];
+        renderList(prev.data);
+    }
+});
+
 //Load json data
-fetch("https://raw.githubusercontent.com/peacemaker4/test-assignment-3/refs/heads/main/menu-options.json").then(response => response.json())
-  .then(jdata => {
-    currentList = [{data: jdata.menu_options }];
-    renderList(jdata.menu_options);
-  })
-  .catch(err => console.error(err));
+fetch("https://raw.githubusercontent.com/peacemaker4/test-assignment-3/refs/heads/main/menu-options.json")
+    .then(response => response.json())
+    .then(jdata => {
+        currentList = [{data: jdata.menu_options}];
+        renderList(jdata.menu_options);
+    })
+    .catch(err => console.error(err));

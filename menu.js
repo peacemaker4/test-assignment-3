@@ -4,6 +4,8 @@ const menuPath = document.getElementById("menu-path");
 const backBtn = document.getElementById("back-btn");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
+const deleteBtn = document.getElementById("delete-btn");
+const exportBtn = document.getElementById("export-btn");
 
 let currentList = [];
 let menuData = null;
@@ -12,8 +14,15 @@ let menuData = null;
 function renderList(categories) {
     sceneRoot.innerHTML = "";
 
-    categories.forEach((cat, i) => {
+    //Category item list is empty
+    if(!categories.length){
+        const entity = document.createElement("a-entity");
+        entity.setAttribute("text", "value: This category is empty; color:#000000;");
+        entity.setAttribute("position", "0.25 0 -1");
+        sceneRoot.appendChild(entity);
+    }
 
+    categories.forEach((cat, i) => {
         const box = document.createElement("a-box");
         box.setAttribute("position", `${(i - categories.length/2) * 2 + 1} 0 -3`);
         box.setAttribute("width", "1.5");
@@ -38,11 +47,12 @@ function renderList(categories) {
                 renderItem(cat);
             }
         });
-        prevBtn.hidden = true
-        nextBtn.hidden = true
-
         sceneRoot.appendChild(box);
     })
+    prevBtn.hidden = true
+    nextBtn.hidden = true
+    deleteBtn.hidden = true
+
     updateMenuPath();
 }
 
@@ -68,6 +78,7 @@ function renderItem(item) {
         prevBtn.hidden = false
         nextBtn.hidden = false
     }
+    deleteBtn.hidden = false
 
     sceneRoot.appendChild(entity);
     updateMenuPath();
@@ -86,13 +97,14 @@ function updateMenuPath() {
 }
 
 //Back button
-backBtn.addEventListener("click", () => {
+backBtn.addEventListener("click", () => navigateBack());
+function navigateBack(){
     if (currentList.length > 1) {
         currentList.pop();
         const prev = currentList[currentList.length - 1];
         renderList(prev.data);
     }
-});
+}
 
 //Scroll items in same subcategory
 prevBtn.addEventListener("click", () => navigateItem(-1));
@@ -105,10 +117,33 @@ function navigateItem(direction) {
     
     const next_index = (item_index + direction + subitems.length) % subitems.length;
     renderItem(subitems[next_index])
-    console.log(subitems[next_index])
     currentList[currentList.length - 1] = subitems[next_index]
     updateMenuPath();
 }
+
+//Delete button
+deleteBtn.addEventListener("click", () =>{
+    let subitems = currentList[currentList.length - 2].data
+    let curr_item = currentList[currentList.length - 1]
+    let item_index = subitems.findIndex(i => i.name === curr_item.name)
+
+    let subcategory = currentList[currentList.length - 2]
+    let category = currentList[currentList.length - 3]
+    
+    let option = menuData.find(i => i.name == category.name).options.find(o => o.name == subcategory.name)
+    option.options.splice(item_index, 1)
+    navigateBack()
+})
+
+//Export button
+exportBtn.addEventListener("click", () =>{
+    const jsonStr = JSON.stringify(menuData, null, 2);
+
+    const blob = new Blob([jsonStr], { type: "application/json" });
+
+    exportBtn.href = URL.createObjectURL(blob);
+    exportBtn.download = "export.json";
+})
 
 //Open link to item
 function navigateToPath(pathParts, options) {

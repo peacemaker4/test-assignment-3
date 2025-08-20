@@ -86,6 +86,8 @@ function renderItem(item) {
 
 //Menu path update
 function updateMenuPath() {
+    backBtn.hidden = currentList.length > 1 ? false : true
+
     const pathParts = currentList.slice(1).map(x => x.name);
     menuPath.innerHTML = "";
     menuPath.textContent = (pathParts.join(" / "));

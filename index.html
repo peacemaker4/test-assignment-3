@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
         <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     </head>
     <body>
         <a-scene cursor="rayOrigin: mouse;" background="color: #d1fdff" environment="">
@@ -14,12 +16,28 @@
             <a-entity id="scene-root"></a-entity>
         </a-scene>
 
-        <div id="menu-path"></div>
-        <button id="back-btn">Назад</button>
-        <button id="prev-btn" hidden>Пред.</button>
-        <button id="next-btn" hidden>След.</button>
-        <button id="delete-btn" hidden>Удалить</button>
-        <a id="export-btn" download>Экспорт</a>
+        <div id="navbar">
+            <div id="menu-path"></div>
+
+            <a id="export-btn" class="btn" download> 
+                <i class="fa-solid fa-file-export"></i>
+                Экспорт
+            </a>
+            <button id="back-btn" class="btn" hidden>
+                <i class="fa-solid fa-arrow-left"></i>
+                Назад
+            </button>
+        </div>
+        <button id="prev-btn" class="btn btn-circle" hidden>
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="next-btn" class="btn btn-circle" hidden>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <button id="delete-btn" class="btn" hidden>
+            <i class="fa-solid fa-trash"></i>
+            Удалить
+        </button>
         
         <script src="menu.js"></script>
     </body>

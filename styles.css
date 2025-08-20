@@ -1,38 +1,79 @@
-#menu-path {
+body {
+  font-family: "Montserrat";
+}
+
+#navbar {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  height: 60px;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#menu-path {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  align-items: center;
+  fill-opacity: 0.5;
+  background-color: white;
+  border: 1px solid rgba(172, 172, 172, 0.5);
+  border-radius: 6px;
+  gap: 6px;
+  text-decoration: none;
+}
+.btn:hover{
+  background: rgba(231, 231, 231, 0.75);
 }
 
 #back-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
+  top: 80px;
+  right: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#back-btn:hover {
+  transform: translateY(-0.25px);
 }
 
 #prev-btn {
   position: absolute;
   top: 50%;
   left: 10px;
-  cursor: pointer;
 }
+
 #next-btn {
   position: absolute;
   top: 50%;
   right: 10px;
-  cursor: pointer;
+}
+
+.btn-circle{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
 }
 
 #delete-btn {
   position: absolute;
   bottom: 10px;
-  right: 50%;
   cursor: pointer;
-}
-#export-btn {
-  position: absolute;
-  top: 10px;
-  right: 80px;
-  cursor: pointer;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
 }

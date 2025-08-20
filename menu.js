@@ -2,6 +2,8 @@ const sceneRoot = document.getElementById("scene-root");
 
 const menuPath = document.getElementById("menu-path");
 const backBtn = document.getElementById("back-btn");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
 
 let currentList = [];
 let menuData = null;
@@ -28,14 +30,16 @@ function renderList(categories) {
         box.appendChild(text);
 
         box.addEventListener("click", () => {
-        if (cat.options) {
-            currentList.push({ data: cat.options, name: cat.name });
-            renderList(cat.options);
-        } else {
-            currentList.push({ data: [], name: cat.name });
-            renderItem(cat);
-        }
+            if (cat.options) {
+                currentList.push({ data: cat.options, name: cat.name });
+                renderList(cat.options);
+            } else {
+                currentList.push({ data: [], name: cat.name });
+                renderItem(cat);
+            }
         });
+        prevBtn.hidden = true
+        nextBtn.hidden = true
 
         sceneRoot.appendChild(box);
     })
@@ -57,6 +61,13 @@ function renderItem(item) {
     text.setAttribute("color", "#000000");
     text.setAttribute("position", "0 1.25 0");
     entity.appendChild(text);
+
+    //Item controls
+    let subitems = currentList[currentList.length - 2].data
+    if(subitems.length > 1){
+        prevBtn.hidden = false
+        nextBtn.hidden = false
+    }
 
     sceneRoot.appendChild(entity);
     updateMenuPath();
@@ -82,6 +93,22 @@ backBtn.addEventListener("click", () => {
         renderList(prev.data);
     }
 });
+
+//Scroll items in same subcategory
+prevBtn.addEventListener("click", () => navigateItem(-1));
+nextBtn.addEventListener("click", () => navigateItem(1));
+
+function navigateItem(direction) {
+    let curr_item = currentList[currentList.length - 1]
+    let subitems = currentList[currentList.length - 2].data
+    let item_index = subitems.findIndex(i => i.name === curr_item.name)
+    
+    const next_index = (item_index + direction + subitems.length) % subitems.length;
+    renderItem(subitems[next_index])
+    console.log(subitems[next_index])
+    currentList[currentList.length - 1] = subitems[next_index]
+    updateMenuPath();
+}
 
 //Open link to item
 function navigateToPath(pathParts, options) {

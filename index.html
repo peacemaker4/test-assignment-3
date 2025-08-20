@@ -4,18 +4,28 @@
         <meta charset="utf-8">
         <title>Многоуровневое меню</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+        <!-- aframe -->
         <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <!-- font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"> 
+        <!-- icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+        <!-- environment -->
+        <script src="https://unpkg.com/aframe-environment-component@1.5.x/dist/aframe-environment-component.min.js"></script>
     </head>
     <body>
-        <a-scene cursor="rayOrigin: mouse;" background="color: #d1fdff" environment="">
-            <a-camera position="0 0 0"></a-camera>
-
+        <!-- scene -->
+        <a-scene cursor="rayOrigin: mouse;" >
+            <a-camera position="0 2 0"></a-camera>
+            <a-entity class="environment" position="-0.11 1 3" light="intensity: 1.5; color: #e0f1ff"></a-entity>
+            <a-entity environment="lightPosition: 1 5 5; ground: flat; grid: 1x1; groundColor: #7d7d7d; groundColor2: #787878"></a-entity>
+            <!-- <a-sky radius="200" theta-length="95" color="#8DD5F2" class="environment" material="" visible="" geometry="" scale=""></a-sky> -->
+            
             <a-entity id="scene-root"></a-entity>
         </a-scene>
 
+        <!-- UI -->
         <div id="navbar">
             <div id="menu-path"></div>
 

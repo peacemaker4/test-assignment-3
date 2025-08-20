@@ -17,25 +17,29 @@ function renderList(categories) {
     //Category item list is empty
     if(!categories.length){
         const entity = document.createElement("a-entity");
-        entity.setAttribute("text", "value: This category is empty; color:#000000;");
-        entity.setAttribute("position", "0.25 0 -1");
+        entity.setAttribute("text", "value: This category is empty; color:#000000; side: double;");
+        entity.setAttribute("position", "0.25 2 -1");
         sceneRoot.appendChild(entity);
     }
 
     categories.forEach((cat, i) => {
         const box = document.createElement("a-box");
-        box.setAttribute("position", `${(i - categories.length/2) * 2 + 1} 0 -3`);
+        box.setAttribute("position", `${(i - categories.length/2) * 2 + 1} 2 -3`);
         box.setAttribute("width", "1.5");
         box.setAttribute("height", "1.5");
         box.setAttribute("depth", "0.2");
         box.setAttribute("color", cat.color);
-
+        box.setAttribute("animation", "property: scale; from: 0.5 0.5 0.5; to: 1 1 1; dur: 200; easing: easeInOutSine;");
+        box.setAttribute("animation__scale", "property: scale; to: 0.9 0.9 0.9; dur: 200; easing: easeInOutSine; startEvents: mouseenter");
+        box.setAttribute("animation__scale_reverse", "property: scale; to: 1 1 1; dur: 200; easing: easeInOutSine; startEvents: mouseleave");
+        
         const text = document.createElement("a-text");
         text.setAttribute("value", cat.name);
         text.setAttribute("align", "center");
         text.setAttribute("color", "#000000");
         text.setAttribute("position", "0 0 0.1");
         text.setAttribute("width", "4.5");
+
         box.appendChild(text);
 
         box.addEventListener("click", () => {
@@ -63,13 +67,16 @@ function renderItem(item) {
     const entity = document.createElement("a-entity");
     entity.setAttribute("geometry", "primitive: dodecahedron; radius: 1;");
     entity.setAttribute("material", `color:${item.color}`);
-    entity.setAttribute("position", "0 0 -3");
+    entity.setAttribute("position", "0 2 -3");
+    entity.setAttribute("animation", "property: scale; from: 0.5 0.5 0.5; to: 1 1 1; dur: 300; easing: easeInOutSine;");
+    entity.setAttribute("animation__rotation", "property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear;");
 
     const text = document.createElement("a-text");
     text.setAttribute("value", item.name);
     text.setAttribute("align", "center");
     text.setAttribute("color", "#000000");
     text.setAttribute("position", "0 1.25 0");
+    text.setAttribute("side", "double")
     entity.appendChild(text);
 
     //Item controls
